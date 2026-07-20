@@ -64,7 +64,8 @@ type KCPConfig struct {
 }
 
 type IDPConfig struct {
-	RealmDenyList []string
+	RealmDenyList  []string
+	SeedConfigFile string
 
 	SMTPServer  string
 	SMTPPort    int
@@ -176,6 +177,7 @@ func (c *Config) AddFlags(fs *pflag.FlagSet) {
 	fs.BoolVar(&c.SetDefaultPassword, "set-default-password", c.SetDefaultPassword, "Enable setting default password for identity provider users")
 	fs.BoolVar(&c.AllowMemberTuplesEnabled, "allow-member-tuples-enabled", c.AllowMemberTuplesEnabled, "Enable allow-member tuples management")
 	fs.StringSliceVar(&c.IDP.RealmDenyList, "idp-realm-deny-list", c.IDP.RealmDenyList, "Comma-separated list of Keycloak realms to ignore")
+	fs.StringVar(&c.IDP.SeedConfigFile, "idp-seed-config-file", c.IDP.SeedConfigFile, "Path to YAML file with upstream identity provider seed configuration (empty disables seeding)")
 	fs.StringVar(&c.IDP.SMTPServer, "idp-smtp-server", c.IDP.SMTPServer, "Set Keycloak SMTP server host")
 	fs.IntVar(&c.IDP.SMTPPort, "idp-smtp-port", c.IDP.SMTPPort, "Set Keycloak SMTP server port")
 	fs.StringVar(&c.IDP.FromAddress, "idp-from-address", c.IDP.FromAddress, "Set SMTP from address")
